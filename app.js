@@ -18,7 +18,15 @@ const students = [
     {
         id:3,
         name:"Adarsh"
-    }
+    },
+    {
+        id:4,
+        name:"Ram"
+    },
+    {
+        id:5,
+        name:"Krishna"
+    },
 ];
 
 
@@ -42,6 +50,23 @@ app.post("/add-student",(req,res)=>{
      students.push(tempData);
      console.log(students);
      res.send("Data saved sucessfully!");
+});
+
+app.post("/delete-student/:id",(req,res)=>{
+    const stu_id = req.params.id;
+    console.log(stu_id);
+    students.splice(stu_id-1,1); 
+    console.log(students);
+    res.send("deleted successfully!");
+})
+
+app.put("/update-student/:id",(req,res)=>{
+        const data = req.body;
+        const stu_id = req.params.id;
+        console.log(data);
+        students[stu_id-1] = data;
+        console.log(students);
+        res.send("Data updated successfully!");
 });
 
 app.listen(3000,(req,res)=>{
